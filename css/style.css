@@ -1,0 +1,67 @@
+@-ms-viewport{
+  width: device-width;
+}
+
+@font-face {
+  font-family: product-sans;
+  src: url(./googlesans-regular-webfont.woff);
+}
+
+body{
+  font-family: arial,sans-serif;
+}
+
+#logo{
+  color: blue;
+  font-family: product-sans;
+}
+
+.overlay{
+  opacity:0.8;
+    background-color:#ccc;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1000;
+    overflow-x: hidden; /* For Opera */
+   	-webkit-box-shadow:
+   		inset #19d4ff 0 0 0 20px,
+   		inset #18cdf7 0 0 0 4px,
+   		inset #53dfff 0 0 0 40px,
+   		inset #50d8f7 0 0 0 44px,
+   		inset #8ce9ff 0 0 0 64px,
+   		inset #88e2f7 0 0 0 68px,
+   		inset #c5f4ff 0 0 0 88px,
+   		inset #bfecf7 0 0 0 92px;
+   	-moz-box-shadow:
+      inset #19d4ff 0 0 0 20px,
+      inset #18cdf7 0 0 0 4px,
+      inset #53dfff 0 0 0 40px,
+      inset #50d8f7 0 0 0 44px,
+      inset #8ce9ff 0 0 0 64px,
+      inset #88e2f7 0 0 0 68px,
+      inset #c5f4ff 0 0 0 88px,
+      inset #bfecf7 0 0 0 92px;
+    box-shadow:
+      inset #19d4ff 0 0 0 20px,
+      inset #18cdf7 0 0 0 4px,
+      inset #53dfff 0 0 0 40px,
+      inset #50d8f7 0 0 0 44px,
+      inset #8ce9ff 0 0 0 64px,
+      inset #88e2f7 0 0 0 68px,
+      inset #c5f4ff 0 0 0 88px,
+      inset #bfecf7 0 0 0 92px;
+}
+
+#hello-world{
+  font-size: 60px;
+  color: #616570;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
