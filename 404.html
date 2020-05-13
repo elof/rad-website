@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <title>404</title>
+    <script type="text/javascript">
+      (function(f,a){if(!a.__SV){var b=window;try{var d,m,j,k=b.location,c=k.hash;d=function(a,b){return(m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null};c&&d(c,"state")&&(j=JSON.parse(decodeURIComponent(d(c,"state"))),"mpeditor"===j.action&&(b.sessionStorage.setItem("_mpcehash",c),history.replaceState(j.desiredHash||"",f.title,k.pathname+k.search)))}catch(n){}var l,h;window.freshpaint=a;a._i=[];a.init=function(b,d,g){function c(b,i){var a=i.split(".");2==a.length&&(b=b[a[0]],i=a[1]);b[i]=function(){b.push([i].concat(Array.prototype.slice.call(arguments,
+      0)))}}var e=a;"undefined"!==typeof g?e=a[g]=[]:g="freshpaint";e.people=e.people||[];e.toString=function(b){var a="freshpaint";"freshpaint"!==g&&(a+="."+g);b||(a+=" (stub)");return a};e.people.toString=function(){return e.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+      for(h=0;h<l.length;h++)c(e,l[h]);var f="set set_once union unset remove delete".split(" ");e.get_group=function(){function a(c){b[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));e.push([d,call2])}}for(var b={},d=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<f.length;c++)a(f[c]);return b};a._i.push([b,d,g])};a.__SV=1.3;b=f.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof FRESHPAINT_CUSTOM_LIB_URL?
+      FRESHPAINT_CUSTOM_LIB_URL:"//perfalytics.com/static/js/freshpaint.js";d=f.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)}})(document,window.freshpaint||[]);
+      freshpaint.init("88542edc-f340-40ee-92e4-2d461b3a0fc4");
+    </script>
+  </head>
+  <body>
+    <div class="404" style="padding-top:200px; text-align: center; font-size: 125px; animation:blinkingText 1.2s infinite;">
+      404
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="./images/firework1.gif" id="img1">
+        </div>
+        <div class="col-sm-4">
+          <img src="./images/firework4.gif">
+        </div>
+        <div class="col-sm-4">
+          <img src="./images/firework5.gif">
+        </div>
+        <div class="col-sm-4">
+          <img src="./images/firework6.gif">
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+
+      // Set the number of snowflakes (more than 30 - 40 not recommended)
+      var snowmax=4
+
+      // Set the colors for the snow. Add as many colors as you like
+      var snowcolor=new Array("#aaaacc","#ddddff","#ccccdd","#f3f3f3","#f0ffff")
+
+      // Set the fonts, that create the snowflakes. Add as many fonts as you like
+      var snowtype=new Array("Times","Arial","Times","Verdana")
+
+      // Set the letter that creates your snowflake (recommended: * )
+      var snowletter=" <img src=./images/taco.png> "
+
+      // Set the speed of sinking (recommended values range from 0.3 to 2)
+      var sinkspeed=0.6
+
+      // Set the maximum-size of your snowflakes
+      var snowmaxsize=20
+
+      // Set the minimal-size of your snowflakes
+      var snowminsize=8
+
+      // Set the snowing-zone
+      // Set 1 for all-over-snowing, set 2 for left-side-snowing
+      // Set 3 for center-snowing, set 4 for right-side-snowing
+      var snowingzone=1
+
+      ///////////////////////////////////////////////////////////////////////////
+      // CONFIGURATION ENDS HERE
+      ///////////////////////////////////////////////////////////////////////////
+
+
+      // Do not edit below this line
+      var snow=new Array()
+      var marginbottom
+      var marginright
+      var timer
+      var i_snow=0
+      var x_mv=new Array();
+      var crds=new Array();
+      var lftrght=new Array();
+      var browserinfos=navigator.userAgent
+      var ie5=document.all&&document.getElementById&&!browserinfos.match(/Opera/)
+      var ns6=document.getElementById&&!document.all
+      var opera=browserinfos.match(/Opera/)
+      var browserok=ie5||ns6||opera
+
+      function randommaker(range) {
+              rand=Math.floor(range*Math.random())
+          return rand
+      }
+
+      function initsnow() {
+              if (ie5 || opera) {
+                      marginbottom = document.body.scrollHeight
+                      marginright = document.body.clientWidth-15
+              }
+              else if (ns6) {
+                      marginbottom = document.body.scrollHeight
+                      marginright = window.innerWidth-15
+              }
+              var snowsizerange=snowmaxsize-snowminsize
+              for (i=0;i<=snowmax;i++) {
+                      crds[i] = 0;
+                  lftrght[i] = Math.random()*15;
+                  x_mv[i] = 0.03 + Math.random()/10;
+                      snow[i]=document.getElementById("s"+i)
+                      snow[i].style.fontFamily=snowtype[randommaker(snowtype.length)]
+                      snow[i].size=randommaker(snowsizerange)+snowminsize
+                      snow[i].style.fontSize=snow[i].size+'px';
+                      snow[i].style.color=snowcolor[randommaker(snowcolor.length)]
+                      snow[i].style.zIndex=1000
+                      snow[i].sink=sinkspeed*snow[i].size/5
+                      if (snowingzone==1) {snow[i].posx=randommaker(marginright-snow[i].size)}
+                      if (snowingzone==2) {snow[i].posx=randommaker(marginright/2-snow[i].size)}
+                      if (snowingzone==3) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/4}
+                      if (snowingzone==4) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/2}
+                      snow[i].posy=randommaker(2*marginbottom-marginbottom-2*snow[i].size)
+                      snow[i].style.left=snow[i].posx+'px';
+                      snow[i].style.top=snow[i].posy+'px';
+              }
+              movesnow()
+      }
+
+      function movesnow() {
+              for (i=0;i<=snowmax;i++) {
+                      crds[i] += x_mv[i];
+                      snow[i].posy+=snow[i].sink
+                      snow[i].style.left=snow[i].posx+lftrght[i]*Math.sin(crds[i])+'px';
+                      snow[i].style.top=snow[i].posy+'px';
+
+                      if (snow[i].posy>=marginbottom-2*snow[i].size || parseInt(snow[i].style.left)>(marginright-3*lftrght[i])){
+                              if (snowingzone==1) {snow[i].posx=randommaker(marginright-snow[i].size)}
+                              if (snowingzone==2) {snow[i].posx=randommaker(marginright/2-snow[i].size)}
+                              if (snowingzone==3) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/4}
+                              if (snowingzone==4) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/2}
+                              snow[i].posy=0
+                      }
+              }
+              var timer=setTimeout("movesnow()",50)
+      }
+
+      for (i=0;i<=snowmax;i++) {
+              document.write("<span id='s"+i+"' style='position:absolute;top:-"+snowmaxsize+"'>"+snowletter+"</span>")
+      }
+      if (browserok) {
+              window.onload=initsnow
+      }
+    </script>
+  </body>
+</html>

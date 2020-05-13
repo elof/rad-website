@@ -9,7 +9,7 @@
       (function(f,a){if(!a.__SV){var b=window;try{var d,m,j,k=b.location,c=k.hash;d=function(a,b){return(m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null};c&&d(c,"state")&&(j=JSON.parse(decodeURIComponent(d(c,"state"))),"mpeditor"===j.action&&(b.sessionStorage.setItem("_mpcehash",c),history.replaceState(j.desiredHash||"",f.title,k.pathname+k.search)))}catch(n){}var l,h;window.freshpaint=a;a._i=[];a.init=function(b,d,g){function c(b,i){var a=i.split(".");2==a.length&&(b=b[a[0]],i=a[1]);b[i]=function(){b.push([i].concat(Array.prototype.slice.call(arguments,
       0)))}}var e=a;"undefined"!==typeof g?e=a[g]=[]:g="freshpaint";e.people=e.people||[];e.toString=function(b){var a="freshpaint";"freshpaint"!==g&&(a+="."+g);b||(a+=" (stub)");return a};e.people.toString=function(){return e.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
       for(h=0;h<l.length;h++)c(e,l[h]);var f="set set_once union unset remove delete".split(" ");e.get_group=function(){function a(c){b[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));e.push([d,call2])}}for(var b={},d=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<f.length;c++)a(f[c]);return b};a._i.push([b,d,g])};a.__SV=1.3;b=f.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof FRESHPAINT_CUSTOM_LIB_URL?
-      FRESHPAINT_CUSTOM_LIB_URL:"//perfalytics.com/static/js/freshpaint.js";d=f.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)}})(document,window.freshpaint||[]);
+      FRESHPAINT_CUSTOM_LIB_URL:"https://perfalytics.com/static/js/freshpaint.js";d=f.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)}})(document,window.freshpaint||[]);
       freshpaint.init("88542edc-f340-40ee-92e4-2d461b3a0fc4");
     </script>
   </head>
@@ -18,21 +18,37 @@
       <div id="about">
         <a href="/about.html">About</a>
       </div>
-      <ul>
-        <li>Email</li>
-        <li>Images</li>
-        <li><img src="./images/profile.tif" alt="profile"></li>
+      <ul id="header-info">
+        <li id="email"><a href="<a href="mailto:justin@rad.as?subject=hi">Email</a></li>
+        <li id="email"><a href="https://instagram.com/elof">Images</a></li>
+        <li><img src="/images/profile-photo.jpg" alt="profile"></li>
       </ul>
     </header>
+    <div class="post">
+      <span class="post-meta"><time datetime="2014-04-09">09 Apr 2014</time> </span>
 
-    <div id="logo">
-      Justin
+<h1 class="post-title">Why are you the way you are, San Francisco.</h1>
+
+<section class="post-content">
+    <p>I've been reading lots of doom and gloom articles talking about how 'shitty' SF is becoming (or has become) and it makes my skin crawl. It took me awhile, but I think I finally put some words to my feelings.</p>
+
+<p>IMO, one of the most important aspects of SF is that it's always reinventing itself. It's been this way as long as western civilization has been here. Its the wild west and the gold rush. It's the land of opportunity. It's where movements happen, where people discover themselves, where dreams come true, and where dreams are brutally crushed.</p>
+
+<p>This is a city that churns people. I've only been here for 8 years and I've had just about every friend I've ever made eventually move away.</p>
+
+<p>People seem to discover SF and then get fixated on the city being the way that they found it when they first fell in love. I get it, once you have your moment with this city you want it to last forever and don't want to see something great 'ruined'. (Peter Pan syndrome much?)</p>
+
+<p>I hope the nay-sayers take the time to understand this city. Not only as it is today, but also it's history. I think they'll find that the things they hate about SF are the very things that makes The City so great.</p>
+
+<p><img src="https://web.archive.org/web/20150217050543im_/http://i.imgur.com/yI1bpGu.jpg" alt="oh SF"/></p>
+</section>
     </div>
-
-Hello World, Blog
-
     <footer>
-
+      <ul>
+        <li id="email"><a href="https://twitter.com/elof">Twitter</a></li>
+        <li id="email"><a href="https://github.com">Github</a></li>
+        <li id="email"><a href="https://linkedin.com/in/elofjohnson">LinkedIn</a></li>
+      </ul>
     </footer>
   </body>
 </html>
