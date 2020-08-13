@@ -81,7 +81,7 @@ header{
 }
 
 /* algolia */
-.aa-input-search {
+#aa-search-input {
   font-family: arial,sans-serif;
   color: #222;
   font-size: small;
@@ -278,10 +278,30 @@ footer li{
   max-width: 800px;
   margin: 0 auto;
   padding: 20px 20px 60px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.post a:link {
+  color: #08425b;
+  text-decoration: none;
+}
+
+.post img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .date {
   font-size: 12px;
+}
+
+.quote {
+  background-color: lightyellow;
+  font-size: 14px;
+  width: 90%;
+  font-family: monospace;
 }
 
 @keyframes blinkingText{
@@ -292,14 +312,58 @@ footer li{
     100%{   color: #red;    }
 }
 
+.resume-header {
+  color: #585958;
+  border-bottom: 2px solid black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.contact-info {
+  float: right;
+  font-size: 15px;
+}
+
+#ln {
+  display: inline;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height: 15px;
+  margin-bottom: -2px;
+}
+
+.sub-header {
+  font-size: 15px;
+  color: #585958;
+  font-weight: bold;
+}
+
+.job-title {
+  font-size: 15px;
+  color: #585958;
+  font-style: italic;
+}
+
+.paragraph {
+  font-size: 14px;
+  color: #585a58;
+}
+
+.resume-list {
+  font-size: 14px;
+  color: #585a58;
+  padding-left: 5px;
+}
+
 @media only screen and (max-width: 600px) {
   .post {
     padding-bottom: 50px;
     margin: 0;
   }
 
-  .aa-input-search {
-    width: 300px;
+  #aa-search-input {
+    width: 80%;
   }
 
   .aa-input-icon {
