@@ -290,7 +290,11 @@ footer li{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  max-width: 800px;
+}
+#thing > img {
+  max-width: 800px;
+  padding-top: 100px;
 }
 
 .date {
@@ -308,7 +312,7 @@ footer li{
     0%{     color: #red;    }
     49%{    color: #blue; }
     60%{    color: transparent; }
-    99%{    color:transparent;  }
+    99%{    color: transparent;  }
     100%{   color: #red;    }
 }
 
