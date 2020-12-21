@@ -9,6 +9,7 @@
 
 body{
   font-family: arial,sans-serif;
+  color: #585958;
 }
 
 header{
@@ -294,7 +295,7 @@ footer li{
 }
 #thing > img {
   max-width: 800px;
-  padding-top: 100px;
+  padding-top: 75px;
 }
 
 .date {
