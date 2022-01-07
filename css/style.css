@@ -309,6 +309,16 @@ footer li{
   font-family: monospace;
 }
 
+.listPosts li{
+  text-decoration: none;
+  padding-bottom: 25px;
+  list-style: none;
+}
+
+.listPosts li a {
+  color: #d642f4;
+}
+
 @keyframes blinkingText{
     0%{     color: #red;    }
     49%{    color: #blue; }
