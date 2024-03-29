@@ -6,15 +6,28 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <title>Rad Website</title>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMVE9GEEQ3"></script>
+  <!-- Macrometa EST -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-LMVE9GEEQ3');
-  </script>
+    function init() {
+    fetch(`https://sbox09.photoniq.macrometa.io/api/est/v1/tracker/inject-script`)
+        .then(e => e.text()).then(e => {
+            const {
+                execute
+            } = JSON.parse(e);
+            let t = document.createElement("script");
+            t.textContent = execute, document.body.appendChild(t), photoniqest.settings("pageview").then(() => {
+                photoniqest.track("pageview")
+            }).then(() => {
+                photoniqest._processServerResponse({
+                    pageVars: [],
+                    fetch: [],
+                    execute: []
+                })
+            })
+        }).catch(e => console.error("Error fetching injected code:", e))
+    }
+    init();
+    </script>
   </head>
   <body>
     <header>
