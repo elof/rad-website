@@ -15,8 +15,52 @@
     </script>
 
     <title>About Justin</title>
+
+    <style>
+      body {
+        background-color: #f0f0f0;
+      }
+      .container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+      }
+
+      .haiku {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
+      .line {
+        margin: 10px 0;
+      }
+
+      .home-link {
+        position: absolute;
+        top: 10px; /* Adjust as needed */
+        left: 10px; /* Adjust as needed */
+        font-size: 13px;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.87);
+      }
+    </style>
   </head>
-  <body>
-    Me, and this website, are still a work in progress.
-  </body>
+  <div class="container">
+  <a href="/" class="home-link">Home</a>
+  <div class="haiku">
+    <div class="line">Fog hugs the Bay Bridge,</div>
+    <div class="line">Building tech, solving problems</div>
+    <div class="line">Kisses good night shared</div>
+  </div>
+</div>
+</body>
 </html>
