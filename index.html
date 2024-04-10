@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <title>Rad Website</title>
   <!-- Macrometa FPS -->
-  <script src="https://sbox09.photoniq.macrometa.io/api/ds/v1"></script>
+  <script src="https://sbox02.photoniq.macrometa.io/api/ds/v1"></script>
   <script>
       async function recordVisit() {
           try {
@@ -21,7 +21,7 @@
                   method: "POST",
                   headers: {
                       "Content-Type": "application/json",
-                      "Authorization": "apikey T-_3vEfAEfHZu4sfxyUkPOBF.default.xM6xnJjbEn3BAnI6gMuvYOkxDHEaBVFprIdegIuBqtbmw4i216BOmVZ6efTHCmEId4a20c"
+                      "Authorization": "apikey T-g4_8zumHFAikvlJcZZ_6UF.default.uZQNjUAy9xab36kN2Q4SiJ8tSVceTIHsHR5eHuhrhOc7q7u6DNAXh0YgITkHcV1Ta3d6ca"
                   },
                   body: JSON.stringify(dsData)
               });
@@ -43,7 +43,7 @@
   <!-- Macrometa EST -->
   <script>
     function init() {
-    fetch(`https://sbox09.photoniq.macrometa.io/api/est/v1/tracker/inject-script`)
+    fetch(`https://sbox02.photoniq.macrometa.io/api/est/v1/tracker/inject-script`)
         .then(e => e.text()).then(e => {
             const {
                 execute
