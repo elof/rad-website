@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <title>Rad Website</title>
   <!-- Macrometa FPS -->
-  <script src="https://sbox02.photoniq.macrometa.io/api/ds/v1"></script>
+  <script src="https://sbox07.photoniq.macrometa.io/api/ds/v1"></script>
   <script>
       async function recordVisit() {
           try {
@@ -17,11 +17,11 @@
               const dsData = await dsClient.get();
 
               // Record a visit in the server
-              const response = await fetch("https://sbox02.photoniq.macrometa.io/api/ds/v1/visits", {
+              const response = await fetch("https://sbox07.photoniq.macrometa.io/api/ds/v1/visits", {
                   method: "POST",
                   headers: {
                       "Content-Type": "application/json",
-                      "Authorization": "apikey T-g4_8zumHFAikvlJcZZ_6UF.default.uZQNjUAy9xab36kN2Q4SiJ8tSVceTIHsHR5eHuhrhOc7q7u6DNAXh0YgITkHcV1Ta3d6ca"
+                      "Authorization": "apikey T-grwHkiJTFMDWTqRAgswthk.default.wTfV1SU8ynzJO6s5PfO2Xlb3yw40bJPbL06igLvAVnnUjpptld26T8zasdrDu7bsa8ffca"
                   },
                   body: JSON.stringify(dsData)
               });
@@ -43,7 +43,7 @@
   <!-- Macrometa EST -->
   <script>
     function init() {
-    fetch(`https://sbox02.photoniq.macrometa.io/api/est/v1/tracker/inject-script`)
+    fetch(`https://sbox07.photoniq.macrometa.io/api/est/v1/tracker/inject-script`)
         .then(e => e.text()).then(e => {
             const {
                 execute
