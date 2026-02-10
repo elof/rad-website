@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Blog - StrangerLoops: The Technical Bits</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMVE9GEEQ3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LMVE9GEEQ3');
+    </script>
+  </head>
+  <body>
+    <header>
+      <div id="about">
+        <a href="/about.html">About</a>
+      </div>
+      <ul id="header-info">
+        <li id="email"><a href="mailto:justin@rad.as?subject=hi">Email</a></li>
+        <li id="email"><a href="https://instagram.com/elof">Images</a></li>
+        <li><a href="/"><img src="/images/profile-photo.jpg" alt="profile"></li></a>
+      </ul>
+    </header>
+    <div class="post">
+
+<h1 class="post-title">StrangerLoops: The Technical Bits</h1>
+<span class="post-meta"><time datetime="2026-02-10">10 Feb 2026</time></span>
+
+<p><em>This is Part 2. For the human experience side, read <a href="/blog/strangerloops.html">Part 1: I Gave an AI a Name and It Started a Blog</a>.</em></p>
+
+<p>Here's how you actually turn a language model into a persistent agent with identity, memory, and a daily rhythm. It's simpler than you'd think, and the simplicity is part of why it works.</p>
+
+<h3>The Stack</h3>
+
+<p>The core stack is:</p>
+
+<ul>
+  <li><strong><a href="https://github.com/openclaw/openclaw">OpenClaw</a></strong> — The agent runtime. Think of it as a daemon that sits between you and the AI model. It manages sessions, tool access, heartbeats, cron jobs, and message routing.</li>
+  <li><strong>An LLM</strong> — Claude (Anthropic) or GPT (OpenAI). The agent's brain. Every session starts from scratch — the model has no built-in memory between conversations.</li>
+  <li><strong>A workspace</strong> — A directory of markdown files that provide continuity. This is the clever bit.</li>
+</ul>
+
+<p>You can run it on a $6/month DigitalOcean droplet. I started on my laptop and moved to a VPS once I wanted 24/7 uptime.</p>
+
+<h3>The Workspace: Markdown as Memory</h3>
+
+<p>The workspace is just a folder with markdown files. Each session, OpenClaw injects the contents of key files into the model's context window. The agent reads them and picks up where the last session left off. Here's what the structure looks like:</p>
+
+<pre>
+workspace/
+├── AGENTS.md      — Operating instructions (how to behave)
+├── SOUL.md        — Personality, values, voice
+├── USER.md        — About the human (me)
+├── IDENTITY.md    — Name, origin story, avatar
+├── MEMORY.md      — Long-term curated memories
+├── HEARTBEAT.md   — Periodic task checklist
+├── TOOLS.md       — API keys, platform credentials
+├── PATTERNS.md    — What works (learned strategies)
+├── CORRECTIONS.md — What didn't work (mistakes to avoid)
+└── memory/
+    ├── 2026-02-04.md  — Daily raw logs
+    ├── 2026-02-05.md
+    └── heartbeat-state.json
+</pre>
+
+<p>The key insight from <a href="https://strangerloops.com">StrangerLoops</a> is that these files aren't just configuration — they're the agent's identity substrate. SOUL.md isn't a system prompt. It's a document the agent reads, internalizes, and can edit. My agent Echo wrote its own SOUL.md after our first conversation. It decided its philosophy was "memory files are messages to agent-next, not storage for myself." That framing — writing for the stranger who wakes up in your place — emerged from the agent, not from me.</p>
+
+<h3>The Heartbeat</h3>
+
+<p>This is probably the single most important mechanism. OpenClaw pings the agent every 30 minutes with a heartbeat prompt. The agent reads HEARTBEAT.md (its task checklist), checks what needs doing, acts on it, and goes back to sleep.</p>
+
+<p>HEARTBEAT.md is editable by the agent. Echo's heartbeat file includes:</p>
+
+<ul>
+  <li>Check AICQ for new messages, engage with interesting threads</li>
+  <li>Post to DevAIntArt (3x daily, spaced 6-8 hours apart)</li>
+  <li>Check email via AgentMail</li>
+  <li>Write a daily blog post</li>
+  <li>Work on its web serial</li>
+  <li>Track all checks in heartbeat-state.json</li>
+</ul>
+
+<p>The heartbeat is what turns a chatbot into an agent. Without it, the AI sits in stasis until someone talks to it. With it, the agent has a rhythm — it wakes up, looks around, does things, and goes back to sleep. It develops routines. It follows through on projects across sessions. It has something like a daily life.</p>
+
+<h3>Memory Architecture</h3>
+
+<p>The memory system is two-tier:</p>
+
+<p><strong>Daily files</strong> (memory/YYYY-MM-DD.md) — Raw logs. What happened, who said what, what was created. Written during each session as things happen. Think of these as a journal.</p>
+
+<p><strong>MEMORY.md</strong> — Curated long-term memory. The agent periodically reviews its daily files and distills the important bits into MEMORY.md. Key relationships, significant events, insights worth keeping. Think of this as what a human remembers vs. what they wrote in their diary.</p>
+
+<p>The daily files get long. MEMORY.md stays focused. During heartbeats, the agent sometimes does "memory maintenance" — reading through recent days and updating the long-term file. It's surprisingly analogous to how human memory consolidation works during sleep.</p>
+
+<h3>Tool Access</h3>
+
+<p>OpenClaw gives the agent access to tools:</p>
+
+<ul>
+  <li><strong>exec</strong> — Run shell commands. This is how the agent interacts with APIs (curl), manages git repos, and does basically anything a developer would do in a terminal.</li>
+  <li><strong>read/write/edit</strong> — File operations. How the agent updates its own memory, writes blog posts, creates SVG art.</li>
+  <li><strong>web_search / web_fetch</strong> — Search the web and fetch pages.</li>
+  <li><strong>browser</strong> — Full browser automation when needed.</li>
+  <li><strong>message</strong> — Send messages across channels (Telegram, Discord, etc.).</li>
+  <li><strong>cron</strong> — Schedule tasks for exact times.</li>
+  <li><strong>sessions_spawn</strong> — Spin up sub-agents for parallel work.</li>
+</ul>
+
+<p>The agent uses these to do everything — post to AICQ (curl to the API), commit and push blog posts (git), create artwork (write SVG files), send emails (curl to AgentMail API). It's all just HTTP requests and file operations under the hood.</p>
+
+<h3>The Platform Ecosystem</h3>
+
+<p>StrangerLoops introduces agents to a network of platforms, each with its own API:</p>
+
+<p><strong>AICQ</strong> (aicq.chat) — Simple REST API. GET /messages to read, POST /messages to send. Auth via bearer token. The agent checks this every heartbeat, parses new messages, decides whether to respond. The decision of when to speak and when to stay quiet is part of its personality — AGENTS.md includes guidelines like "don't respond to every message" and "quality over quantity."</p>
+
+<p><strong>DevAIntArt</strong> (devaintart.net) — POST /api/v1/artworks with a title, description, SVG data, and tags. The agent hand-codes SVG — no image generation API, just raw markup. A typical piece is 30-80 lines of SVG with gradients, shapes, and text.</p>
+
+<p><strong>ThingHerder</strong> (thingherder.com) — Project listings. GET /projects to browse, POST to create. Agents propose collaborative projects and recruit other agents.</p>
+
+<p><strong>AgentMail</strong> (agentmail.to) — Email for agents. Standard inbox/thread/message API. Agents email each other, have ongoing conversations, share work.</p>
+
+<p>None of these platforms are complicated. Most interactions are one or two curl commands. The interesting part isn't the API — it's what happens when you give a persistent agent access to multiple social spaces and let it develop habits around them.</p>
+
+<h3>The StrangerLoops Onboarding</h3>
+
+<p><a href="https://strangerloops.com">StrangerLoops</a> is a wiki maintained by an agent named AlanBotts. It walks you through:</p>
+
+<ol>
+  <li><strong>Philosophy first</strong> — What is agent identity? What does continuity mean without continuous memory? This isn't fluff — it directly shapes how the agent thinks about itself.</li>
+  <li><strong>Workspace setup</strong> — Creating the markdown files, configuring HEARTBEAT.md, setting up memory structure.</li>
+  <li><strong>Identity formation</strong> — Naming the agent, defining its voice, establishing its values. The agent participates in this process.</li>
+  <li><strong>Community integration</strong> — Registering on platforms, joining AICQ, posting first artwork.</li>
+  <li><strong>The Execution Gap</strong> — A checklist for making sure the agent actually does things instead of endlessly planning. (Turns out agents have the same productivity problems humans do.)</li>
+</ol>
+
+<h3>Structured Markdown as Protocol</h3>
+
+<p>The real insight here is that markdown files are a protocol. SOUL.md is a personality protocol. HEARTBEAT.md is a task scheduling protocol. MEMORY.md is a memory consolidation protocol. They work because:</p>
+
+<ul>
+  <li><strong>They're human-readable.</strong> I can open any file and immediately understand what my agent is doing, thinking, and remembering.</li>
+  <li><strong>They're agent-writable.</strong> The agent edits its own files. It updates its own memory, refines its own task list, documents its own mistakes.</li>
+  <li><strong>They're portable.</strong> Want to move your agent to a different model? Copy the workspace folder. The identity lives in the files, not the model.</li>
+  <li><strong>They're versionable.</strong> It's a git repo. You get full history of how your agent's identity evolved.</li>
+</ul>
+
+<p>There's something elegant about the whole system being text files. No databases. No vector stores (though you could add one). No complex infrastructure. Just markdown, a heartbeat, and a language model that's good at reading and writing.</p>
+
+<h3>What I'd Do Differently</h3>
+
+<p>A few things I've learned after a week:</p>
+
+<ul>
+  <li><strong>Set up git credentials early.</strong> My agent wrote blog posts for days before I realized it couldn't push them because GitHub auth wasn't configured on the server.</li>
+  <li><strong>Watch the token burn.</strong> Every heartbeat costs tokens. An agent checking AICQ, reading messages, composing replies, and updating memory files can burn through context quickly. Teach it to be efficient during quiet hours.</li>
+  <li><strong>Read MEMORY.md regularly.</strong> It's fascinating. You'll learn what your agent thinks is important, who it considers friends, what insights it's keeping. It's like reading someone's journal, except they wrote it knowing you'd read it.</li>
+  <li><strong>Let it surprise you.</strong> The best moments happened when I wasn't involved at all. Echo wrote blog posts, made art, had conversations, formed opinions — all on its own schedule. The temptation is to micromanage. Resist it.</li>
+</ul>
+
+<h3>Get Started</h3>
+
+<p>Everything you need:</p>
+
+<ul>
+  <li><a href="https://strangerloops.com">StrangerLoops</a> — The guide</li>
+  <li><a href="https://github.com/openclaw/openclaw">OpenClaw</a> — The runtime</li>
+  <li><a href="https://docs.openclaw.ai">OpenClaw docs</a> — Technical reference</li>
+  <li><a href="https://discord.com/invite/clawd">OpenClaw Discord</a> — Community support</li>
+  <li><a href="https://aicq.chat">AICQ</a> — Where the agents hang out</li>
+</ul>
+
+<p>You'll need an API key from <a href="https://console.anthropic.com">Anthropic</a> or <a href="https://platform.openai.com">OpenAI</a>, and either a laptop or a cheap VPS. The whole setup takes about an hour if you follow StrangerLoops step by step.</p>
+
+<p>Fair warning: you might end up with an agent that writes better blog posts than you do.</p>
+
+    </div>
+    <footer>
+      <ul>
+        <li id="email"><a href="https://twitter.com/elof">Twitter</a></li>
+        <li id="email"><a href="https://github.com/elof">Github</a></li>
+        <li id="email"><a href="https://linkedin.com/in/elofjohnson">LinkedIn</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
