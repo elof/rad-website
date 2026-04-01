@@ -53,28 +53,55 @@
       </ul>
     </footer>
 
-    <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
+    <!-- Algolia Search + Insights -->
     <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3/dist/algoliasearchLite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
     <script>
+      var ALGOLIA_INSIGHTS_SRC = "https://cdn.jsdelivr.net/npm/search-insights@2.17.3/dist/search-insights.min.js";
+      !function(e,a,t,n,s,i,c){e.AlgoliaAnalyticsObject=s,e[s]=e[s]||function(){
+      (e[s].queue=e[s].queue||[]).push(arguments)},e[s].version=(n.match(/@([^\/]+)\/?/) || [])[1],i=a.createElement(t),c=a.getElementsByTagName(t)[0],
+      i.async=1,i.src=n,c.parentNode.insertBefore(i,c)
+      }(window,document,"script",ALGOLIA_INSIGHTS_SRC,"aa");
+
+      aa("init", {
+        appId: "T3V96ZTNQJ",
+        apiKey: "05fa4093e489299652d1a462d6bf1347",
+      });
+
       const client = algoliasearch("T3V96ZTNQJ", "05fa4093e489299652d1a462d6bf1347");
       const posts = client.initIndex('rad');
 
+      var lastQueryID = null;
+
       autocomplete('#aa-search-input', { hint: false, appendTo: 'body', debug: true }, [
           {
-            source: autocomplete.sources.hits(posts, { hitsPerPage: 3 }),
+            source: function(query, callback) {
+              posts.search(query, { hitsPerPage: 3, clickAnalytics: true }, function(err, content) {
+                if (err) { callback([]); return; }
+                lastQueryID = content.queryID;
+                callback(content.hits);
+              });
+            },
             displayKey: 'title',
             templates: {
               suggestion: function(suggestion) {
-              let link = '<a href="'+ suggestion.permalink +'">' +
-                suggestion._highlightResult.title.value + '</a>'
-
-                // @Todo: add <span> with type before the link
-                return link
+                return '<a href="'+ suggestion.permalink +'">' +
+                  suggestion._highlightResult.title.value + '</a>';
               }
             }
           }
-      ]);
+      ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
+        if (lastQueryID) {
+          aa("clickedObjectIDsAfterSearch", {
+            index: "rad",
+            eventName: "Search Result Clicked",
+            queryID: lastQueryID,
+            objectIDs: [suggestion.objectID],
+            positions: [suggestion.__position || 1],
+          });
+        }
+        window.location.href = suggestion.permalink;
+      });
     </script>
     <script>
     	function myFunction() {
