@@ -5,63 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <title>Rad Website</title>
-  <!-- Macrometa FPS -->
-  <script src="https://sbox16.photoniq.macrometa.io/api/ds/v1"></script>
-  <script>
-      async function recordVisit() {
-          try {
-              // Initialize the agent at application startup.
-              const dsClient = await DS_Client.load();
-
-              // Get the visitor details
-              const dsData = await dsClient.get();
-
-              // Record a visit in the server
-              const response = await fetch("https://sbox16.photoniq.macrometa.io/api/ds/v1/visits", {
-                  method: "POST",
-                  headers: {
-                      "Content-Type": "application/json",
-                      "Authorization": "apikey T-MrDmkABKFO99KnXw750MrF.default.yH3YWLQNouD56zypkjMWGU2z1jhLVD4S9LHlIEORSLIOezMyCS8ecg5uWiHnoZIUa1e6a7"
-                  },
-                  body: JSON.stringify(dsData)
-              });
-
-              if (!response.ok) {
-                  throw new Error('Network response was not ok');
-              }
-
-              const responseBody = await response.json();
-              console.log(responseBody);
-          } catch (error) {
-              console.error(error);
-          }
-      }
-
-      recordVisit();
-  </script>
-
-  <!-- Macrometa EST -->
-  <script>
-    function init() {
-    fetch(`https://sbox16.photoniq.macrometa.io/api/est/v1/tracker/inject-script`)
-        .then(e => e.text()).then(e => {
-            const {
-                execute
-            } = JSON.parse(e);
-            let t = document.createElement("script");
-            t.textContent = execute, document.body.appendChild(t), photoniqest.settings("pageview").then(() => {
-                photoniqest.track("pageview")
-            }).then(() => {
-                photoniqest._processServerResponse({
-                    pageVars: [],
-                    fetch: [],
-                    execute: []
-                })
-            })
-        }).catch(e => console.error("Error fetching injected code:", e))
-    }
-    init();
-    </script>
   </head>
   <body>
     <header>
