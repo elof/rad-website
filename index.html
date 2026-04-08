@@ -110,8 +110,40 @@
     	    for(i=0; i < 6; i++){
     	      set.push(Math.floor((Math.random() * 70) + 1));
     		   }
+    	    gtag('event', 'click', { event_category: 'button', event_label: 'Im Feeling Lucky' });
     	    alert("Your lucky numbers are: " + set + "!");
     	}
+
+    	// Track all link and button clicks
+    	document.addEventListener('DOMContentLoaded', function() {
+    	  var links = {
+    	    'About': '/about.html',
+    	    'Email': 'mailto:justin@rad.as',
+    	    'Images': 'instagram.com/elof',
+    	    'Blog': '/blog/',
+    	    'Twitter': 'twitter.com/elof',
+    	    'Github': 'github.com/elof',
+    	    'LinkedIn': 'linkedin.com/in/elofjohnson',
+    	    'Justin Search': 'famous+justins'
+    	  };
+
+    	  document.querySelectorAll('a, button').forEach(function(el) {
+    	    el.addEventListener('click', function() {
+    	      var label = el.textContent.trim() || el.getAttribute('value') || 'unknown';
+    	      var href = el.getAttribute('href') || el.closest('a')?.getAttribute('href') || '';
+    	      var category = el.tagName === 'BUTTON' ? 'button' : 'link';
+
+    	      // Skip search result clicks (handled by Algolia)
+    	      if (el.closest('.aa-suggestions')) return;
+
+    	      gtag('event', 'click', {
+    	        event_category: category,
+    	        event_label: label,
+    	        event_value: href
+    	      });
+    	    });
+    	  });
+    	});
 	</script>
   </body>
 </html>
