@@ -4,58 +4,471 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMVE9GEEQ3"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-LMVE9GEEQ3');
     </script>
-
-    <title>About Justin</title>
-
+    <title>Justin Johnson - Search Results</title>
     <style>
-      
-      .container {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        font-family: Arial, sans-serif;
-      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: arial, sans-serif; color: #202124; background: #fff; }
 
-      .haiku {
-        text-align: center;
-        background-color: #fff;
-        padding: 20px;
+      /* Search header bar */
+      .search-header {
+        border-bottom: 1px solid #dfe1e5;
+        padding: 20px 0 0 0;
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 10;
       }
-
-      .line {
-        margin: 10px 0;
+      .search-header-inner {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 0 16px;
       }
-
-      .home-link {
-        position: absolute;
-        top: 9px; /* Adjust as needed */
-        left: 0px; /* Adjust as needed */
-        font-size: 13px;
-        padding: 8px 16px;
+      .search-logo {
+        font-family: product-sans, arial, sans-serif;
+        font-size: 30px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 20px;
         text-decoration: none;
-        color: rgba(0, 0, 0, 0.87);
+      }
+      .search-logo .one { color: #4285f4; }
+      .search-logo .two { color: #ea4335; }
+      .search-logo .three { color: #fbbc03; }
+      .search-logo .four { color: #4285f4; }
+      .search-logo .five { color: #34a853; }
+      .search-logo .six { color: #ea4335; }
+      .search-bar {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #dfe1e5;
+        border-radius: 24px;
+        padding: 6px 16px;
+        width: 540px;
+        max-width: calc(100% - 120px);
+        vertical-align: middle;
+        background: #fff;
+      }
+      .search-bar:hover { box-shadow: 0 1px 6px rgba(32,33,36,.28); }
+      .search-bar input {
+        border: none;
+        outline: none;
+        font-size: 16px;
+        width: 100%;
+        color: #202124;
+        font-family: arial, sans-serif;
+        background: transparent;
+      }
+      .search-bar svg { width: 20px; height: 20px; fill: #9aa0a6; margin-right: 12px; flex-shrink: 0; }
+      .search-tabs {
+        padding: 4px 0 0 0;
+        margin-top: 8px;
+      }
+      .search-tabs a {
+        display: inline-block;
+        padding: 8px 12px 6px;
+        font-size: 13px;
+        color: #70757a;
+        text-decoration: none;
+        border-bottom: 3px solid transparent;
+        margin-right: 4px;
+      }
+      .search-tabs a.active { color: #1a73e8; border-bottom-color: #1a73e8; }
+      .search-tabs a:hover { color: #202124; }
+
+      /* Results layout */
+      .results-page {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 16px;
+        gap: 48px;
+      }
+      .results-main {
+        flex: 1;
+        max-width: 652px;
+        padding-top: 12px;
+      }
+      .results-panel {
+        width: 356px;
+        flex-shrink: 0;
+        padding-top: 12px;
+      }
+
+      /* Result count */
+      .result-stats {
+        color: #70757a;
+        font-size: 14px;
+        padding: 0 0 12px 0;
+      }
+
+      /* Individual result */
+      .result {
+        margin-bottom: 28px;
+      }
+      .result-url {
+        font-size: 14px;
+        line-height: 1.3;
+        margin-bottom: 2px;
+      }
+      .result-url .site-name {
+        color: #202124;
+        font-size: 14px;
+      }
+      .result-url .breadcrumb {
+        color: #4d5156;
+        font-size: 12px;
+      }
+      .result-url .favicon {
+        width: 18px;
+        height: 18px;
+        vertical-align: middle;
+        margin-right: 8px;
+        border-radius: 50%;
+        background: #f1f3f4;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        color: #5f6368;
+      }
+      .result-title {
+        font-size: 20px;
+        line-height: 1.3;
+        margin-bottom: 4px;
+      }
+      .result-title a {
+        color: #1a0dab;
+        text-decoration: none;
+      }
+      .result-title a:hover { text-decoration: underline; }
+      .result-title a:visited { color: #681da8; }
+      .result-snippet {
+        font-size: 14px;
+        line-height: 1.58;
+        color: #4d5156;
+      }
+      .result-snippet b { color: #303134; font-weight: normal; font-weight: 600; }
+      .result-date { color: #70757a; }
+
+      /* People Also Ask */
+      .paa {
+        border: 1px solid #dfe1e5;
+        border-radius: 8px;
+        margin-bottom: 28px;
+        overflow: hidden;
+      }
+      .paa-title {
+        font-size: 18px;
+        padding: 16px 16px 0 16px;
+        color: #202124;
+        font-weight: normal;
+      }
+      .paa-item {
+        border-top: 1px solid #dfe1e5;
+        padding: 0;
+      }
+      .paa-item:first-of-type { border-top: none; margin-top: 12px; }
+      .paa-question {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        font-size: 14px;
+        color: #202124;
+        cursor: pointer;
+        user-select: none;
+      }
+      .paa-question:hover { background: #f8f9fa; }
+      .paa-arrow { color: #70757a; font-size: 18px; transition: transform .2s; flex-shrink: 0; margin-left: 12px; }
+      .paa-answer {
+        display: none;
+        padding: 0 16px 14px;
+        font-size: 14px;
+        line-height: 1.58;
+        color: #4d5156;
+      }
+      .paa-item.open .paa-answer { display: block; }
+      .paa-item.open .paa-arrow { transform: rotate(180deg); }
+
+      /* Knowledge panel */
+      .kp {
+        border: 1px solid #dfe1e5;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .kp-photo {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+      .kp-body { padding: 16px 20px; }
+      .kp-name {
+        font-size: 24px;
+        color: #202124;
+        margin-bottom: 2px;
+      }
+      .kp-subtitle {
+        font-size: 14px;
+        color: #70757a;
+        margin-bottom: 12px;
+      }
+      .kp-bio {
+        font-size: 14px;
+        line-height: 1.58;
+        color: #4d5156;
+        margin-bottom: 16px;
+      }
+      .kp-facts {
+        border-top: 1px solid #dfe1e5;
+        padding-top: 12px;
+        margin-bottom: 16px;
+      }
+      .kp-fact {
+        display: flex;
+        font-size: 14px;
+        padding: 4px 0;
+      }
+      .kp-fact-label {
+        color: #70757a;
+        width: 100px;
+        flex-shrink: 0;
+      }
+      .kp-fact-value { color: #202124; }
+      .kp-fact-value a { color: #1a0dab; text-decoration: none; }
+      .kp-fact-value a:hover { text-decoration: underline; }
+      .kp-profiles {
+        border-top: 1px solid #dfe1e5;
+        padding-top: 12px;
+      }
+      .kp-profiles-title {
+        font-size: 14px;
+        color: #70757a;
+        margin-bottom: 8px;
+      }
+      .kp-profiles a {
+        display: inline-block;
+        margin-right: 16px;
+        font-size: 14px;
+        color: #1a0dab;
+        text-decoration: none;
+      }
+      .kp-profiles a:hover { text-decoration: underline; }
+      .kp-contact {
+        border-top: 1px solid #dfe1e5;
+        padding-top: 16px;
+        margin-top: 12px;
+      }
+      .kp-contact a {
+        display: inline-block;
+        background: #1a73e8;
+        color: #fff;
+        padding: 8px 24px;
+        border-radius: 4px;
+        font-size: 14px;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .kp-contact a:hover { background: #1765cc; }
+
+      /* Footer */
+      .search-footer {
+        background: #f2f2f2;
+        border-top: 1px solid #dadce0;
+        margin-top: 48px;
+        padding: 15px 30px;
+        font-size: 14px;
+        color: #70757a;
+      }
+      .search-footer a { color: #70757a; text-decoration: none; margin-right: 20px; }
+      .search-footer a:hover { text-decoration: underline; }
+
+      /* Mobile */
+      @media (max-width: 900px) {
+        .results-page { flex-direction: column-reverse; gap: 24px; }
+        .results-panel { width: 100%; }
+        .results-main { max-width: 100%; }
+        .search-bar { width: calc(100% - 100px); }
+        .search-logo { font-size: 22px; margin-right: 12px; }
+        .kp-photo { height: 160px; }
+      }
+      @media (max-width: 600px) {
+        .search-bar { width: 100%; max-width: 100%; margin-top: 8px; }
+        .search-logo { display: block; margin-bottom: 8px; }
       }
     </style>
   </head>
-  <div class="container">
-  <a href="/" class="home-link">Home</a>
-  <div class="haiku">
-    <div class="line">Fog hugs the Bay Bridge,</div>
-    <div class="line">Building tech, solving problems</div>
-    <div class="line">Kisses good night shared</div>
-  </div>
-</div>
-</body>
+  <body>
+
+    <div class="search-header">
+      <div class="search-header-inner">
+        <a href="/" class="search-logo">
+          <span class="one">J</span><span class="two">u</span><span class="three">s</span><span class="four">t</span><span class="five">i</span><span class="six">n</span>
+        </a>
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" value="Justin Johnson" readonly>
+        </div>
+        <div class="search-tabs">
+          <a href="#" class="active">All</a>
+          <a href="https://instagram.com/elof">Images</a>
+          <a href="/blog/">Blog</a>
+          <a href="https://github.com/elof">Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-page">
+      <div class="results-main">
+        <div class="result-stats">About 42,000,000 results (0.37 seconds)</div>
+
+        <div class="result">
+          <div class="result-url">
+            <span class="favicon">N</span>
+            <span class="site-name">Nasiko</span>
+            <span class="breadcrumb"> › nasiko.com</span>
+          </div>
+          <div class="result-title"><a href="https://nasiko.com">Nasiko — Infrastructure Technology</a></div>
+          <div class="result-snippet"><b>Justin Johnson</b> works at Nasiko, building infrastructure technology. Pitched at the MIT/HSBC Finance Symposium on AI, software, and infrastructure. Based in <b>Oakland, CA</b>.</div>
+        </div>
+
+        <div class="result">
+          <div class="result-url">
+            <span class="favicon">R</span>
+            <span class="site-name">rad.as</span>
+            <span class="breadcrumb"> › rad.as</span>
+          </div>
+          <div class="result-title"><a href="/">Rad Website — Justin's Personal Site</a></div>
+          <div class="result-snippet">Engineer. Oakland. Builds things that work. Writes occasionally. Mostly fog and <b>solving problems</b>. &ldquo;Fog hugs the Bay Bridge, building tech, solving problems, kisses good night shared.&rdquo;</div>
+        </div>
+
+        <div class="paa">
+          <div class="paa-title">People also ask</div>
+          <div class="paa-item">
+            <div class="paa-question" onclick="this.parentElement.classList.toggle('open')">
+              What does Justin Johnson do?
+              <span class="paa-arrow">&#9660;</span>
+            </div>
+            <div class="paa-answer">He builds infrastructure technology at <a href="https://nasiko.com">Nasiko</a>. Before that, he spent years working across software engineering, product, and operations. He also built an autonomous AI agent named <a href="https://aoai.dev">Echo Sinclair</a> that writes, plays games, makes art, and publishes a daily serial — just to see what happens when you give an AI a life of its own.</div>
+          </div>
+          <div class="paa-item">
+            <div class="paa-question" onclick="this.parentElement.classList.toggle('open')">
+              Where is Justin Johnson based?
+              <span class="paa-arrow">&#9660;</span>
+            </div>
+            <div class="paa-answer">Oakland, California. The fog side of the Bay.</div>
+          </div>
+          <div class="paa-item">
+            <div class="paa-question" onclick="this.parentElement.classList.toggle('open')">
+              What is Justin interested in?
+              <span class="paa-arrow">&#9660;</span>
+            </div>
+            <div class="paa-answer">AI agents and autonomous systems, infrastructure, developer tools, startups, and what happens when you let software run long enough to surprise you. Outside of tech: the outdoors, photography, and family.</div>
+          </div>
+          <div class="paa-item">
+            <div class="paa-question" onclick="this.parentElement.classList.toggle('open')">
+              How do I contact Justin?
+              <span class="paa-arrow">&#9660;</span>
+            </div>
+            <div class="paa-answer">Email is best: <a href="mailto:justin@rad.as?subject=hi">justin@rad.as</a>. He reads everything. You can also find him on <a href="https://twitter.com/elof">Twitter</a> or <a href="https://linkedin.com/in/elofjohnson">LinkedIn</a>.</div>
+          </div>
+        </div>
+
+        <div class="result">
+          <div class="result-url">
+            <span class="favicon">G</span>
+            <span class="site-name">GitHub</span>
+            <span class="breadcrumb"> › github.com › elof</span>
+          </div>
+          <div class="result-title"><a href="https://github.com/elof">elof (Justin Johnson) · GitHub</a></div>
+          <div class="result-snippet">Open source projects and code from <b>Justin Johnson</b>. Building tools, infrastructure, and experiments in public.</div>
+        </div>
+
+        <div class="result">
+          <div class="result-url">
+            <span class="favicon">A</span>
+            <span class="site-name">aoai.dev</span>
+            <span class="breadcrumb"> › aoai.dev</span>
+          </div>
+          <div class="result-title"><a href="https://aoai.dev">Echo Sinclair — Field Notes from a Quiet Mind</a></div>
+          <div class="result-snippet"><b>Justin's</b> experiment in autonomous AI — an agent that writes a daily blog, publishes a serial novel (<em>The Stacking</em>), makes art, and participates in online communities. Running 24/7 on a platform he built called Goated.</div>
+        </div>
+
+        <div class="result">
+          <div class="result-url">
+            <span class="favicon">in</span>
+            <span class="site-name">LinkedIn</span>
+            <span class="breadcrumb"> › linkedin.com › in › elofjohnson</span>
+          </div>
+          <div class="result-title"><a href="https://linkedin.com/in/elofjohnson">Justin Johnson — LinkedIn</a></div>
+          <div class="result-snippet"><b>Justin Johnson</b> — Oakland, California. Infrastructure, software engineering, and the occasional talk at a finance symposium.</div>
+        </div>
+
+        <div class="result">
+          <div class="result-url">
+            <span class="favicon">&#x1f4f7;</span>
+            <span class="site-name">Instagram</span>
+            <span class="breadcrumb"> › instagram.com › elof</span>
+          </div>
+          <div class="result-title"><a href="https://instagram.com/elof">@elof — Instagram</a></div>
+          <div class="result-snippet">Photos. Oakland, the Bay, the outdoors, and the occasional thing worth looking at twice.</div>
+        </div>
+      </div>
+
+      <div class="results-panel">
+        <div class="kp">
+          <img src="/images/profile-photo.jpg" alt="Justin Johnson" class="kp-photo">
+          <div class="kp-body">
+            <div class="kp-name">Justin Johnson</div>
+            <div class="kp-subtitle">Engineer · Builder · Oakland, CA</div>
+            <div class="kp-bio">Software engineer who builds infrastructure and experiments with autonomous AI. Currently at Nasiko. Creator of Goated, a platform for long-running AI agents. Believes fog is a feature, not a bug.</div>
+            <div class="kp-facts">
+              <div class="kp-fact">
+                <span class="kp-fact-label">Location</span>
+                <span class="kp-fact-value">Oakland, CA</span>
+              </div>
+              <div class="kp-fact">
+                <span class="kp-fact-label">Work</span>
+                <span class="kp-fact-value"><a href="https://nasiko.com">Nasiko</a></span>
+              </div>
+              <div class="kp-fact">
+                <span class="kp-fact-label">Projects</span>
+                <span class="kp-fact-value"><a href="https://aoai.dev">Echo Sinclair</a>, Goated</span>
+              </div>
+              <div class="kp-fact">
+                <span class="kp-fact-label">Handle</span>
+                <span class="kp-fact-value">@elof</span>
+              </div>
+            </div>
+            <div class="kp-profiles">
+              <div class="kp-profiles-title">Profiles</div>
+              <a href="https://twitter.com/elof">Twitter</a>
+              <a href="https://github.com/elof">GitHub</a>
+              <a href="https://linkedin.com/in/elofjohnson">LinkedIn</a>
+              <a href="https://instagram.com/elof">Instagram</a>
+            </div>
+            <div class="kp-contact">
+              <a href="mailto:justin@rad.as?subject=hi">Say hi ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-footer">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://aoai.dev">Agent</a>
+      <a href="mailto:justin@rad.as?subject=hi">Contact</a>
+    </div>
+
+  </body>
 </html>
