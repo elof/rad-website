@@ -4,29 +4,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Blog - Listen to This</title>
-    <!-- Google tag (gtag.js) -->
+    <link rel="stylesheet" type="text/css" href="/css/search-header.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMVE9GEEQ3"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-LMVE9GEEQ3');
     </script>
+    <title>Blog - Listen to This</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: arial, sans-serif; color: #202124; background: #fff; }
+    </style>
   </head>
   <body>
-    <header>
-      <div id="about">
-        <a href="/about.html">About</a>
+
+    <div class="search-header">
+      <div class="search-header-inner">
+        <a href="/" class="search-logo">
+          <span class="one">J</span><span class="two">u</span><span class="three">s</span><span class="four">t</span><span class="five">i</span><span class="six">n</span>
+        </a>
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" value="text to speech dyslexia" readonly>
+        </div>
+        <div class="search-tabs">
+          <a href="/about.html">All</a>
+          <a href="https://instagram.com/elof">Images</a>
+          <a href="/blog/" class="active">Blog</a>
+          <a href="https://github.com/elof">Code</a>
+        </div>
       </div>
-      <ul id="header-info">
-        <li id="email"><a href="mailto:justin@rad.as?subject=hi">Email</a></li>
-        <li id="email"><a href="https://instagram.com/elof">Images</a></li>
-        <li><a href="/"><img src="/images/profile-photo.jpg" alt="profile"></li></a>
-      </ul>
-    </header>
-    <div class="post">
+    </div>
+
+    <div class="post-reading">
+
       <h1 id="post-title">Listen to This</h1>
       <p class="date">28 Oct 2018</p>
       <p class="has-line-data" data-line-start="0" data-line-end="1"><em>How I became a more productive and happy reader.</em></p>
@@ -48,12 +61,13 @@
       <p class="has-line-data" data-line-start="31" data-line-end="32">Ok, hope this is helpful or at least interesting. If you have other tips that might help me or other folks simplify their lives, please leave them in a comment!</p>
       <p class="has-line-data" data-line-start="33" data-line-end="34">P.S. I wrote this article using the Grammarly and highly recommend it for everyone. Some other Dyslexic people I know prefer dictation, but I still like typing and Grammarly makes that way more manageable for me!</p>
     </div>
-    <footer>
-      <ul>
-        <li id="email"><a href="https://twitter.com/elof">Twitter</a></li>
-        <li id="email"><a href="https://github.com/elof">Github</a></li>
-        <li id="email"><a href="https://linkedin.com/in/elofjohnson">LinkedIn</a></li>
-      </ul>
-    </footer>
+
+    <div class="search-footer">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="mailto:justin@rad.as?subject=hi">Contact</a>
+    </div>
+
   </body>
 </html>
